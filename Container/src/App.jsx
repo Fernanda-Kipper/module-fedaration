@@ -5,13 +5,14 @@ import {
   Route
 } from "react-router-dom";
 import { ChakraProvider, extendTheme } from '@chakra-ui/react'
+import { QueryClientProvider, QueryClient } from "react-query";
 
 import '@fontsource/montserrat/400.css'
 import '@fontsource/montserrat/500.css'
 import '@fontsource/montserrat/600.css'
 
-import { Cart } from './pages/Cart'
-import { ProductList } from './pages/ProductList'
+import { CartPage } from './pages/Cart'
+import { ProductListPage } from './pages/ProductList'
 
 const theme = extendTheme({
   fonts: {
@@ -20,15 +21,19 @@ const theme = extendTheme({
   },
 })
 
+const queryClient = new QueryClient()
+
 export default function App(){
   return(
-    <ChakraProvider theme={theme}>
-      <Router>
-        <Routes>
-          <Route path="/cart" element={<Cart />}/>
-          <Route path="/" element={<ProductList />}/>
-        </Routes>
-      </Router>
-    </ChakraProvider>
+    <QueryClientProvider client={queryClient}>
+      <ChakraProvider theme={theme}>
+        <Router>
+          <Routes>
+            <Route path="/cart" element={<CartPage />}/>
+            <Route path="/" element={<ProductListPage />}/>
+          </Routes>
+        </Router>
+      </ChakraProvider>
+    </QueryClientProvider>
   )
 }

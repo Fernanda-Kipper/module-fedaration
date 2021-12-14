@@ -1,11 +1,16 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const ModuleFederationPlugin = require("webpack").container
+  .ModuleFederationPlugin;
+
 const path = require('path')
 
 const isDev = process.NODE_ENV  !== 'production'
 
+const deps = require("./package.json").dependencies;
+
 module.exports = {
   mode: isDev ? 'development' : 'production',
-  entry: path.resolve(__dirname, 'src', 'index.jsx'),
+  entry: path.resolve(__dirname, 'src', 'index.js'),
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js'
@@ -16,9 +21,16 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.jsx$/,
+        test: /\.js$|jsx/,
         exclude: /node_modules/,
         use: 'babel-loader'
+      },
+      {
+        test: /\.m?js$/,
+        type: "javascript/auto",
+        resolve: {
+          fullySpecified: false,
+        },
       },
       {
         test: /\.css$/,
@@ -46,6 +58,32 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, 'public', 'index.html'),
+    }),
+    new ModuleFederationPlugin({
+      name: "container",
+      filename: "remoteEntry.js",
+      remotes: {
+        productlist: "productlist@http://localhost:3001/remoteEntry.js",
+        container: "container@http://localhost:3000/remoteEntry.js",
+        cart: "cart@http://localhost:3002/remoteEntry.js",
+      },
+      exposes: {
+        "./Container": "./src/App",
+      },
+      shared: [
+        {
+          ...deps,
+          react: {
+            singleton: true,
+            requiredVersion: deps.react,
+          },
+          "react-dom": {
+            singleton: true,
+            requiredVersion: deps["react-dom"],
+          },
+          moment: "^2.29.1",
+        }
+      ],
     }),
   ]
 }

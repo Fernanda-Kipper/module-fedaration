@@ -1,9 +1,15 @@
+import React from 'react'
 import { Page } from "../components/Page";
+import { Loading } from "./Loading";
 
-export function ProductList(){
+const ProductList = React.lazy(() => import("productlist/ProductList"));
+
+export function ProductListPage(){
   return(
-    <Page>
-
-    </Page>
+    <React.Suspense fallback={<Loading />}>
+      <Page>
+        <ProductList />
+      </Page>
+    </React.Suspense>
   )
 }
