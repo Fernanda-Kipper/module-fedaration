@@ -1,0 +1,8 @@
+{
+  "products": [
+    { "id": 1, "title": "Tênis Nike Air Force", "image": "https://images.lojanike.com.br/860x860/produto/tenis-nike-air-force-1-07-masculino-315122-111-1.png", "value": "R$ 400,00" },
+    { "id": 2, "title": "Tênis Qix Classico", "image": "https://60398.cdn.simplo7.net/static/60398/sku/masculino-tenis-qix-link--p-1612541175320.jpg", "value": "R$ 200,00" },
+    { "id": 3, "title": "Meia cano alto Nike", "image": "https://static.zattini.com.br/produtos/meia-nike-cano-alto-everyday-cush-crew-c-6-pares/28/HZM-3682-028/HZM-3682-028_zoom3.jpg?ts=1630604285&ims=544x", "value": "R$ 20,00" },
+    { "id": 4, "title": "Mochila escolar", "image": "https://meninashoes.vtexassets.com/arquivos/ids/412682/I3040F67-Mochila-Kipling-Seoul-Purple-Glitter-variacao1.jpg?v=637453885733730000", "value": "R$ 60,00" }
+  ]
+}
