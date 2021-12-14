@@ -7,7 +7,7 @@ export function ProductItem({ product }){
 
   return (
     <Box maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden' m="2">
-      <Image src={product.image} alt={product.title} />
+      <Image src={product.image} alt={product.title} maxW="300px"/>
       <Box p='6'>
         <Box
           mt='1'
